@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa Biogênese do Amor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        /* Efeito de pulsação */
+        .heartbeat {
+            animation: heartbeat 1.5s ease-in-out infinite both;
+        }
+        @keyframes heartbeat {
+            from { transform: scale(1); }
+            10% { transform: scale(0.91); }
+            17% { transform: scale(0.98); }
+            33% { transform: scale(0.87); }
+            45% { transform: scale(1); }
+        }
+
+        /* Efeito de brilho nos contadores */
+        .glowing-box {
+            box-shadow: 0 0 5px rgba(251, 146, 173, 0.5), 0 0 10px rgba(251, 146, 173, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glowing-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(251, 146, 173, 0.7), 0 0 25px rgba(251, 146, 173, 0.5);
+        }
+
+        /* Galeria e Modal */
+        .gallery-img {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .gallery-img:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        #modal {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Jardim de Frases Interativo */
+        #garden {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 1rem;
+            background: rgba(0,0,0,0.2);
+            border: 1px dashed rgba(255,255,255,0.3);
+            overflow: hidden;
+        }
+        .love-phrase {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.75rem;
+            color: #fbcfe8; /* light pink */
+            text-shadow: 0 0 8px rgba(236, 72, 153, 0.8);
+            white-space: nowrap;
+            pointer-events: none;
+            animation: floatUpAndFade 7s ease-out forwards;
+        }
+        @keyframes floatUpAndFade {
+            0% { transform: translateY(20px) scale(0.5); opacity: 0; }
+            15% { transform: translateY(0) scale(1); opacity: 1; }
+            85% { transform: translateY(-80px) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0.8); opacity: 0; }
+        }
+        
+        /* Animação das Folhas (com emoji) */
+        .leaf {
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            font-size: 2rem; /* Controla o tamanho do emoji */
+            animation: fall linear;
+            pointer-events: none;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="text-white bg-gray-900">
+
+    <!-- Container do Fundo (Corrigido) -->
+    <div class="fixed inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover" alt="Floresta exuberante com raios de sol" onerror="this.style.display='none'">
+        <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+
+    <!-- Container Principal do Conteúdo -->
+    <div class="relative z-10 min-h-screen w-full flex flex-col items-center justify-center p-4 py-10">
+        <div class="text-center backdrop-blur-md bg-black/30 p-4 sm:p-8 rounded-3xl shadow-2xl border border-white/20 max-w-5xl w-full">
+
+            <h1 class="font-dancing text-4xl sm:text-5xl lg:text-7xl text-pink-300 drop-shadow-lg">Nossa Biogênese do Amor</h1>
+            
+            <p class="mt-4 text-sm sm:text-base text-gray-200 max-w-2xl mx-auto">
+                A contagem regressiva para o florescer do nosso primeiro ano juntos.
+            </p>
+
+            <!-- Container da Contagem Regressiva -->
+            <div id="countdown-container" class="flex flex-wrap justify-center gap-3 sm:gap-6 my-8">
+                <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
+                    <span id="days" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Ciclos</span>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
+                    <span id="hours" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Metamorfoses</span>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
+                    <span id="minutes" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Simbioses</span>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
+                    <span id="seconds" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Pulsos</span>
+                </div>
+            </div>
+            
+            <p class="text-base sm:text-lg font-semibold text-gray-300">
+                Nosso momento: <span class="text-pink-300">06 de Julho de 2025, às 19:00</span>
+            </p>
+
+            <!-- Jardim de Frases Interativo -->
+            <div class="mt-10">
+                <h2 class="font-dancing text-3xl sm:text-4xl text-pink-300">Nosso Jardim de Sentimentos</h2>
+                <div id="garden" class="mt-4"></div>
+                <button id="love-button" class="mt-4 bg-pink-600 hover:bg-pink-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:shadow-pink-500/50 transition-all duration-300 transform hover:scale-105">
+                    <span class="heartbeat inline-block mr-2">❤️</span>Declarar Amor
+                </button>
+            </div>
+
+            <!-- Seção da Galeria de Fotos -->
+            <div class="mt-12">
+                <h2 class="font-dancing text-3xl sm:text-4xl text-pink-300">Memórias que Cultivamos</h2>
+                <div id="gallery" class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                     <img src="https://i.imgur.com/1E8hp3n.jpeg" alt="Foto do casal 1" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/2Ltz2bN.jpeg" alt="Foto do casal 2" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/CzRjGKc.jpeg" alt="Foto do casal 3" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/OB4puqr.jpeg" alt="Foto do casal 4" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/tMoFoqo.jpeg" alt="Foto do casal 5" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/RjsqFvc.jpeg" alt="Foto do casal 6" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/PymF8ns.jpeg" alt="Foto do casal 7" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/rAc07TD.jpeg" alt="Foto do casal 8" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                </div>
+            </div>
+            
+            <footer class="mt-8 text-center text-white/70 text-xs sm:text-sm">
+                Feito com <span class="text-red-500">♥</span>, especialmente para a minha bióloga favorita.
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal da Galeria -->
+    <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
+        <img id="modal-img" src="" alt="Foto do casal em destaque" class="max-w-full max-h-full rounded-lg shadow-2xl">
+        <button id="modal-close" class="absolute top-4 right-4 text-white text-4xl font-bold">&times;</button>
+    </div>
+
+    <script>
+        // --- LÓGICA DA CONTAGEM REGRESSIVA ---
+        const countDownDate = new Date("2025-07-06T19:00:00").getTime();
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownContainer = document.getElementById('countdown-container');
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownContainer.innerHTML = `<div class="w-full"><h2 class="font-dancing text-4xl sm:text-6xl text-pink-300 drop-shadow-lg">Feliz 1 Ano de Namoro!</h2><p class="mt-4 text-xl sm:text-2xl text-white">Nosso ecossistema se completou e nossa jornada floresceu. Te amo!</p><div class="heartbeat text-5xl mt-6 text-red-500">❤️</div></div>`;
+                return;
+            }
+            daysEl.innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+            hoursEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).slice(-2);
+            minutesEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).slice(-2);
+            secondsEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60)) / 1000)).slice(-2);
+        }, 1000);
+
+        // --- LÓGICA DO JARDIM DE FRASES E FOLHAS ---
+        const garden = document.getElementById('garden');
+        const loveButton = document.getElementById('love-button');
+        
+        const yourLovePhrases = [
+            "Eu te amo minha princessa.",
+            "Te amo 1000 Fatorial.",
+            "Vou casar com voce.",
+            "Minha princesinha.",
+            "Voce é minha mulher.",
+            "Te amo mais que a quantidade de folhas nessa tela"
+        ];
+        
+        const spawnPoints = [
+            { top: '15%', left: '10%' }, { top: '30%', left: '60%' },
+            { top: '55%', left: '20%' }, { top: '25%', left: '80%' },
+            { top: '60%', left: '70%' }, { top: '40%', left: '40%' }
+        ];
+        let currentPhraseIndex = 0;
+
+        // Função para criar a chuva de folhas
+        function createLeafFall() {
+            for (let i = 0; i < 30; i++) {
+                const leaf = document.createElement('div');
+                leaf.classList.add('leaf');
+                leaf.innerHTML = '�'; // Adiciona o emoji da folha
+                leaf.style.left = `${Math.random() * 100}vw`;
+                leaf.style.animationDuration = `${Math.random() * 3 + 5}s`; // Duração entre 5s e 8s
+                leaf.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(leaf);
+
+                setTimeout(() => {
+                    leaf.remove();
+                }, 8000); // Remove a folha depois que a animação terminar
+            }
+        }
+
+        loveButton.addEventListener('click', () => {
+            const phraseElement = document.createElement('p');
+            phraseElement.classList.add('love-phrase');
+            
+            const currentPhrase = yourLovePhrases[currentPhraseIndex];
+            const spawnPoint = spawnPoints[currentPhraseIndex % spawnPoints.length];
+            
+            phraseElement.textContent = currentPhrase;
+            phraseElement.style.left = `calc(${spawnPoint.left} + ${Math.random() * 8 - 4}%)`;
+            phraseElement.style.top = `calc(${spawnPoint.top} + ${Math.random() * 8 - 4}%)`;
+            
+            garden.appendChild(phraseElement);
+
+            // Verifica se é a frase especial para a chuva de folhas
+            if (currentPhrase === "Te amo mais que a quantidade de folhas nessa tela") {
+                createLeafFall();
+            }
+            
+            // Avança para a próxima frase
+            currentPhraseIndex = (currentPhraseIndex + 1) % yourLovePhrases.length;
+
+            setTimeout(() => {
+                phraseElement.remove();
+            }, 6900);
+        });
+
+        // --- LÓGICA DA GALERIA MODAL ---
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalClose = document.getElementById('modal-close');
+
+        gallery.addEventListener('click', (e) => {
+            if (e.target.tagName === 'IMG') {
+                modalImg.src = e.target.src;
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        };
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+�
