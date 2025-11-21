@@ -97,47 +97,43 @@
 </head>
 <body class="text-white bg-gray-900">
 
-    <!-- Container do Fundo (Corrigido) -->
     <div class="fixed inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover" alt="Floresta exuberante com raios de sol" onerror="this.style.display='none'">
         <div class="absolute inset-0 bg-black/60"></div>
     </div>
 
-    <!-- Container Principal do Conteúdo -->
     <div class="relative z-10 min-h-screen w-full flex flex-col items-center justify-center p-4 py-10">
         <div class="text-center backdrop-blur-md bg-black/30 p-4 sm:p-8 rounded-3xl shadow-2xl border border-white/20 max-w-5xl w-full">
 
             <h1 class="font-dancing text-4xl sm:text-5xl lg:text-7xl text-pink-300 drop-shadow-lg">Nossa Biogênese do Amor</h1>
             
             <p class="mt-4 text-sm sm:text-base text-gray-200 max-w-2xl mx-auto">
-                A contagem regressiva para o florescer do nosso primeiro ano juntos.
+                Contando cada segundo da nossa evolução contínua juntos.
             </p>
 
-            <!-- Container da Contagem Regressiva -->
             <div id="countdown-container" class="flex flex-wrap justify-center gap-3 sm:gap-6 my-8">
                 <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
                     <span id="days" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
-                    <span class="text-xs sm:text-sm text-pink-300">Ciclos</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Dias</span>
                 </div>
                 <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
                     <span id="hours" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
-                    <span class="text-xs sm:text-sm text-pink-300">Metamorfoses</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Horas</span>
                 </div>
                 <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
                     <span id="minutes" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
-                    <span class="text-xs sm:text-sm text-pink-300">Simbioses</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Minutos</span>
                 </div>
                 <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
                     <span id="seconds" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
-                    <span class="text-xs sm:text-sm text-pink-300">Pulsos</span>
+                    <span class="text-xs sm:text-sm text-pink-300">Segundos</span>
                 </div>
             </div>
             
             <p class="text-base sm:text-lg font-semibold text-gray-300">
-                Nosso momento: <span class="text-pink-300">06 de Julho de 2025, às 19:00</span>
+                Início da nossa simbiose: <span class="text-pink-300">06 de Julho de 2024</span>
             </p>
 
-            <!-- Jardim de Frases Interativo -->
             <div class="mt-10">
                 <h2 class="font-dancing text-3xl sm:text-4xl text-pink-300">Nosso Jardim de Sentimentos</h2>
                 <div id="garden" class="mt-4"></div>
@@ -146,7 +142,6 @@
                 </button>
             </div>
 
-            <!-- Seção da Galeria de Fotos -->
             <div class="mt-12">
                 <h2 class="font-dancing text-3xl sm:text-4xl text-pink-300">Memórias que Cultivamos</h2>
                 <div id="gallery" class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
@@ -167,33 +162,40 @@
         </div>
     </div>
 
-    <!-- Modal da Galeria -->
     <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
         <img id="modal-img" src="" alt="Foto do casal em destaque" class="max-w-full max-h-full rounded-lg shadow-2xl">
         <button id="modal-close" class="absolute top-4 right-4 text-white text-4xl font-bold">&times;</button>
     </div>
 
     <script>
-        // --- LÓGICA DA CONTAGEM REGRESSIVA ---
-        const countDownDate = new Date("2025-07-06T19:00:00").getTime();
+        // --- LÓGICA DO TEMPO JUNTOS (ALTERADA PARA CONTAGEM PROGRESSIVA) ---
+        
+        // DATA DE INÍCIO DO NAMORO (AAAA-MM-DDTHH:MM:SS)
+        // Assumi 06/07/2024 baseada na contagem regressiva anterior
+        const startDate = new Date("2024-07-06T19:00:00").getTime();
+
         const daysEl = document.getElementById('days');
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
         const secondsEl = document.getElementById('seconds');
-        const countdownContainer = document.getElementById('countdown-container');
-
+        
         const countdownInterval = setInterval(() => {
             const now = new Date().getTime();
-            const distance = countDownDate - now;
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                countdownContainer.innerHTML = `<div class="w-full"><h2 class="font-dancing text-4xl sm:text-6xl text-pink-300 drop-shadow-lg">Feliz 1 Ano de Namoro!</h2><p class="mt-4 text-xl sm:text-2xl text-white">Nosso ecossistema se completou e nossa jornada floresceu. Te amo!</p><div class="heartbeat text-5xl mt-6 text-red-500">❤️</div></div>`;
-                return;
-            }
-            daysEl.innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
-            hoursEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).slice(-2);
-            minutesEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).slice(-2);
-            secondsEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60)) / 1000)).slice(-2);
+            
+            // Diferença agora é: AGORA - DATA INICIAL
+            const distance = now - startDate;
+            
+            // Cálculos de tempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Atualiza o HTML
+            daysEl.innerHTML = days;
+            hoursEl.innerHTML = ('0' + hours).slice(-2);
+            minutesEl.innerHTML = ('0' + minutes).slice(-2);
+            secondsEl.innerHTML = ('0' + seconds).slice(-2);
         }, 1000);
 
         // --- LÓGICA DO JARDIM DE FRASES E FOLHAS ---
@@ -221,7 +223,7 @@
             for (let i = 0; i < 30; i++) {
                 const leaf = document.createElement('div');
                 leaf.classList.add('leaf');
-                leaf.innerHTML = '�'; // Adiciona o emoji da folha
+                leaf.innerHTML = '🍃'; // Adiciona o emoji da folha
                 leaf.style.left = `${Math.random() * 100}vw`;
                 leaf.style.animationDuration = `${Math.random() * 3 + 5}s`; // Duração entre 5s e 8s
                 leaf.style.animationDelay = `${Math.random() * 2}s`;
@@ -285,4 +287,3 @@
     </script>
 </body>
 </html>
-�
