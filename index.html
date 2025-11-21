@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -15,6 +15,9 @@
         }
         .font-dancing {
             font-family: 'Dancing Script', cursive;
+        }
+        .font-mono {
+            font-family: 'Share Tech Mono', monospace;
         }
         
         /* Efeito de pulsação */
@@ -79,12 +82,12 @@
             100% { transform: translateY(-100px) scale(0.8); opacity: 0; }
         }
         
-        /* Animação das Folhas (com emoji) */
+        /* Animação das Folhas */
         .leaf {
             position: fixed;
             top: -10%;
             z-index: 9999;
-            font-size: 2rem; /* Controla o tamanho do emoji */
+            font-size: 2rem;
             animation: fall linear;
             pointer-events: none;
         }
@@ -93,16 +96,57 @@
                 transform: translateY(110vh) rotate(360deg);
             }
         }
+
+        /* --- ESTILOS DO ENIGMA SECRETO (ÁREA DO LABORATÓRIO) --- */
+        #secret-lab {
+            background-color: #0f172a;
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .terminal-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #4ade80;
+            color: #4ade80;
+            font-family: 'Share Tech Mono', monospace;
+            outline: none;
+            width: 100%;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .terminal-text {
+            color: #4ade80;
+            text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+        }
+        
+        /* Barra de Progresso */
+        .progress-container {
+            width: 100%;
+            background-color: #1e293b;
+            border-radius: 9999px;
+            height: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #4ade80;
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px #4ade80;
+        }
     </style>
 </head>
 <body class="text-white bg-gray-900">
 
+    <!-- Container do Fundo -->
     <div class="fixed inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover" alt="Floresta exuberante com raios de sol" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover" alt="Floresta exuberante" onerror="this.style.display='none'">
         <div class="absolute inset-0 bg-black/60"></div>
     </div>
 
-    <div class="relative z-10 min-h-screen w-full flex flex-col items-center justify-center p-4 py-10">
+    <!-- Container Principal do Conteúdo (Romântico) -->
+    <div id="main-content" class="relative z-10 min-h-screen w-full flex flex-col items-center justify-center p-4 py-10 transition-all duration-1000">
         <div class="text-center backdrop-blur-md bg-black/30 p-4 sm:p-8 rounded-3xl shadow-2xl border border-white/20 max-w-5xl w-full">
 
             <h1 class="font-dancing text-4xl sm:text-5xl lg:text-7xl text-pink-300 drop-shadow-lg">Nossa Biogênese do Amor</h1>
@@ -111,6 +155,7 @@
                 Contando cada segundo da nossa evolução contínua juntos.
             </p>
 
+            <!-- Container da Contagem de Tempo -->
             <div id="countdown-container" class="flex flex-wrap justify-center gap-3 sm:gap-6 my-8">
                 <div class="flex flex-col items-center justify-center bg-black/20 p-2 rounded-2xl w-24 h-24 sm:w-32 sm:h-32 border border-white/20 glowing-box">
                     <span id="days" class="text-3xl sm:text-5xl font-bold text-white drop-shadow-md">0</span>
@@ -134,6 +179,7 @@
                 Início da nossa simbiose: <span class="text-pink-300">06 de Julho de 2024</span>
             </p>
 
+            <!-- Jardim de Frases -->
             <div class="mt-10">
                 <h2 class="font-dancing text-3xl sm:text-4xl text-pink-300">Nosso Jardim de Sentimentos</h2>
                 <div id="garden" class="mt-4"></div>
@@ -142,148 +188,295 @@
                 </button>
             </div>
 
+            <!-- Galeria -->
             <div class="mt-12">
                 <h2 class="font-dancing text-3xl sm:text-4xl text-pink-300">Memórias que Cultivamos</h2>
                 <div id="gallery" class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                     <img src="https://i.imgur.com/1E8hp3n.jpeg" alt="Foto do casal 1" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/2Ltz2bN.jpeg" alt="Foto do casal 2" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/CzRjGKc.jpeg" alt="Foto do casal 3" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/OB4puqr.jpeg" alt="Foto do casal 4" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/tMoFoqo.jpeg" alt="Foto do casal 5" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/RjsqFvc.jpeg" alt="Foto do casal 6" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/PymF8ns.jpeg" alt="Foto do casal 7" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
-                    <img src="https://i.imgur.com/rAc07TD.jpeg" alt="Foto do casal 8" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                     <img src="https://i.imgur.com/1E8hp3n.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/2Ltz2bN.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/CzRjGKc.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/OB4puqr.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/tMoFoqo.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/RjsqFvc.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/PymF8ns.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
+                    <img src="https://i.imgur.com/rAc07TD.jpeg" alt="Foto" class="gallery-img rounded-lg w-full h-full object-cover aspect-square">
                 </div>
             </div>
             
-            <footer class="mt-8 text-center text-white/70 text-xs sm:text-sm">
-                Feito com <span class="text-red-500">♥</span>, especialmente para a minha bióloga favorita.
+            <footer class="mt-8 text-center text-white/70 text-xs sm:text-sm select-none">
+                Feito com <span id="secret-trigger" class="text-red-500 cursor-pointer hover:scale-150 inline-block transition-transform">♥</span>, especialmente para a minha bióloga favorita.
             </footer>
         </div>
     </div>
 
+    <!-- CAMADA SECRETA: O LABORATÓRIO DE ENIGMAS -->
+    <div id="secret-lab" class="fixed inset-0 z-50 flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-1000">
+        <div class="max-w-2xl w-full p-8 border-2 border-green-500 bg-black/90 rounded-xl shadow-[0_0_50px_rgba(74,222,128,0.2)] font-mono relative mx-4">
+            
+            <!-- Botão Fechar -->
+            <button onclick="closeSecret()" class="absolute top-2 right-4 text-green-500 hover:text-white text-xl">X</button>
+
+            <div class="text-center mb-6">
+                <h2 class="text-2xl sm:text-3xl text-green-400 font-bold animate-pulse">PROTOCOLO BIOGÊNESE</h2>
+                <p id="level-indicator" class="text-green-700 text-sm mt-2">Nível de Acesso: 1/9</p>
+            </div>
+
+            <!-- Barra de Progresso -->
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <!-- Área do Enigma Dinâmico -->
+            <div id="riddle-container" class="space-y-6">
+                <div class="p-4 border border-green-800 bg-green-900/20 rounded min-h-[150px] flex flex-col justify-center">
+                    <p id="riddle-text" class="terminal-text text-base sm:text-lg mb-4">
+                        <!-- Texto da pergunta inserido via JS -->
+                    </p>
+                    <p id="riddle-hint" class="text-gray-400 text-xs sm:text-sm italic border-t border-green-900/50 pt-4">
+                        <!-- Dica inserida via JS -->
+                    </p>
+                </div>
+                
+                <input type="text" id="riddle-input" class="terminal-input text-xl sm:text-2xl p-2" placeholder="DIGITE A RESPOSTA" autocomplete="off">
+                
+                <p id="error-msg" class="text-red-500 text-xs h-4 mt-2 text-center opacity-0 transition-opacity">DADOS INCORRETOS. ACESSO NEGADO.</p>
+                
+                <button onclick="checkAnswer()" class="w-full mt-2 bg-green-900/50 hover:bg-green-700 text-green-300 border border-green-500 py-3 rounded transition-colors font-bold tracking-widest">
+                    PROCESSAR DADOS
+                </button>
+            </div>
+
+            <!-- TELA FINAL (RECOMPENSA) -->
+            <div id="final-reward" class="hidden text-center py-8">
+                <div class="text-7xl sm:text-9xl font-bold text-pink-500 mb-6 drop-shadow-[0_0_25px_rgba(236,72,153,0.8)] heartbeat">
+                    6
+                </div>
+                <p class="text-white text-xl mb-8 font-dancing animate-bounce">
+                    Parabéns, meu amor! <br>Você completou a sequência genética do nosso amor.
+                </p>
+                
+                <!-- SEU LINK AQUI -->
+                <a href="https://site112.com/cifra-de-cesar-codificar-descodificar" target="_blank" class="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-pink-500/50 transition-all duration-300 transform hover:scale-105">
+                    ACESSAR ARQUIVO SECRETO
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal da Galeria -->
     <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
-        <img id="modal-img" src="" alt="Foto do casal em destaque" class="max-w-full max-h-full rounded-lg shadow-2xl">
+        <img id="modal-img" src="" alt="Foto" class="max-w-full max-h-full rounded-lg shadow-2xl">
         <button id="modal-close" class="absolute top-4 right-4 text-white text-4xl font-bold">&times;</button>
     </div>
 
     <script>
-        // --- LÓGICA DO TEMPO JUNTOS (ALTERADA PARA CONTAGEM PROGRESSIVA) ---
-        
-        // DATA DE INÍCIO DO NAMORO (AAAA-MM-DDTHH:MM:SS)
-        // Assumi 06/07/2024 baseada na contagem regressiva anterior
+        // --- LÓGICA DO SITE PRINCIPAL ---
         const startDate = new Date("2024-07-06T19:00:00").getTime();
-
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
+        const daysEl = document.getElementById('days'), hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds');
         
-        const countdownInterval = setInterval(() => {
+        setInterval(() => {
             const now = new Date().getTime();
-            
-            // Diferença agora é: AGORA - DATA INICIAL
             const distance = now - startDate;
-            
-            // Cálculos de tempo
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Atualiza o HTML
-            daysEl.innerHTML = days;
-            hoursEl.innerHTML = ('0' + hours).slice(-2);
-            minutesEl.innerHTML = ('0' + minutes).slice(-2);
-            secondsEl.innerHTML = ('0' + seconds).slice(-2);
+            daysEl.innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+            hoursEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).slice(-2);
+            minutesEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).slice(-2);
+            secondsEl.innerHTML = ('0' + Math.floor((distance % (1000 * 60)) / 1000)).slice(-2);
         }, 1000);
 
-        // --- LÓGICA DO JARDIM DE FRASES E FOLHAS ---
         const garden = document.getElementById('garden');
         const loveButton = document.getElementById('love-button');
-        
-        const yourLovePhrases = [
-            "Eu te amo minha princessa.",
-            "Te amo 1000 Fatorial.",
-            "Vou casar com voce.",
-            "Minha princesinha.",
-            "Voce é minha mulher.",
-            "Te amo mais que a quantidade de folhas nessa tela"
-        ];
-        
-        const spawnPoints = [
-            { top: '15%', left: '10%' }, { top: '30%', left: '60%' },
-            { top: '55%', left: '20%' }, { top: '25%', left: '80%' },
-            { top: '60%', left: '70%' }, { top: '40%', left: '40%' }
-        ];
+        const yourLovePhrases = ["Eu te amo minha princessa.", "Te amo 1000 Fatorial.", "Vou casar com voce.", "Minha princesinha.", "Voce é minha mulher.", "Te amo mais que a quantidade de folhas nessa tela"];
+        const spawnPoints = [{top:'15%',left:'10%'},{top:'30%',left:'60%'},{top:'55%',left:'20%'},{top:'25%',left:'80%'},{top:'60%',left:'70%'},{top:'40%',left:'40%'}];
         let currentPhraseIndex = 0;
 
-        // Função para criar a chuva de folhas
-        function createLeafFall() {
-            for (let i = 0; i < 30; i++) {
-                const leaf = document.createElement('div');
-                leaf.classList.add('leaf');
-                leaf.innerHTML = '🍃'; // Adiciona o emoji da folha
-                leaf.style.left = `${Math.random() * 100}vw`;
-                leaf.style.animationDuration = `${Math.random() * 3 + 5}s`; // Duração entre 5s e 8s
-                leaf.style.animationDelay = `${Math.random() * 2}s`;
-                document.body.appendChild(leaf);
+        function createLeafFall() { for(let i=0;i<30;i++){ const l=document.createElement('div');l.classList.add('leaf');l.innerHTML='🍃';l.style.left=`${Math.random()*100}vw`;l.style.animationDuration=`${Math.random()*3+5}s`;l.style.animationDelay=`${Math.random()*2}s`;document.body.appendChild(l);setTimeout(()=>l.remove(),8000); } }
+        loveButton.addEventListener('click', () => { const p=document.createElement('p');p.classList.add('love-phrase');p.textContent=yourLovePhrases[currentPhraseIndex];const s=spawnPoints[currentPhraseIndex%spawnPoints.length];p.style.left=`calc(${s.left} + ${Math.random()*8-4}%)`;p.style.top=`calc(${s.top} + ${Math.random()*8-4}%)`;garden.appendChild(p);if(p.textContent.includes("folhas"))createLeafFall();currentPhraseIndex=(currentPhraseIndex+1)%yourLovePhrases.length;setTimeout(()=>p.remove(),6900); });
+        
+        const gallery = document.getElementById('gallery'), modal = document.getElementById('modal'), modalImg = document.getElementById('modal-img');
+        gallery.addEventListener('click', e=>{if(e.target.tagName==='IMG'){modalImg.src=e.target.src;modal.classList.remove('opacity-0','pointer-events-none')}});
+        document.getElementById('modal-close').addEventListener('click',()=>modal.classList.add('opacity-0','pointer-events-none'));
+        modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.add('opacity-0','pointer-events-none')});
 
+
+        // --- LÓGICA AVANÇADA DOS ENIGMAS (ATUALIZADA) ---
+        
+        // CONFIGURAÇÃO DAS FASES (Agora com perguntas pessoais)
+        const riddles = [
+            {
+                id: 1,
+                text: "Fase 1: Para começar, consulte a sabedoria da Raposa em 'O Pequeno Príncipe'. Complete a frase: 'Tu te tornas eternamente _______ por aquilo que cativas.'",
+                hint: "Dica: Procure no livro ou use sua memória literária.",
+                answers: ["responsavel", "responsável"]
+            },
+            {
+                id: 2,
+                text: "Fase 2 (Memória): Onde era o nosso 'esconderijo' secreto? Onde eram feitos nossos encontros no início?",
+                hint: "Dica: Um local móvel com rodas.",
+                answers: ["carro", "no carro", "o carro"]
+            },
+            {
+                id: 3,
+                text: "Fase 3: Na biologia evolutiva, Charles Darwin escreveu 'A Origem das Espécies'. Qual é o nome do mecanismo principal da evolução descrito por ele? 'Seleção _______'.",
+                hint: "Dica: É o processo onde os mais aptos sobrevivem.",
+                answers: ["natural"]
+            },
+            {
+                id: 4,
+                text: "Fase 4 (Memória): Lembra da nossa primeira expedição juntos? Qual foi o destino da nossa primeira viagem?",
+                hint: "Dica: Cidade na serra de Santa Catarina.",
+                answers: ["uribici", "urubici"] // Aceita ambas grafias
+            },
+            {
+                id: 5,
+                text: "Fase 5: Vamos para a literatura brasileira. Em 'Dom Casmurro', Machado de Assis descreve os olhos de Capitu como 'Olhos de _______'.",
+                hint: "Dica: É um fenômeno do mar que puxa tudo para dentro.",
+                answers: ["ressaca"]
+            },
+            {
+                id: 6,
+                text: "Fase 6: Voltando à célula. Existe uma organela famosa por ser a 'usina de energia' da célula, responsável pela respiração celular. Qual é o nome dela?",
+                hint: "Dica: É o pesadelo das aulas de biologia do ensino médio.",
+                answers: ["mitocondria", "mitocôndria"]
+            },
+            {
+                id: 7,
+                text: "Fase 7: Cultura Geek. Segundo o 'Guia do Mochileiro das Galáxias', qual é a resposta fundamental para a vida, o universo e tudo mais?",
+                hint: "Dica: É um número de dois dígitos.",
+                answers: ["42", "quarenta e dois"]
+            },
+            {
+                id: 8,
+                text: "Fase 8: Química Orgânica. O anel de Benzeno é uma estrutura fundamental. Quantos átomos de Carbono formam esse anel?",
+                hint: "Dica: Conte os vértices do hexágono.",
+                answers: ["6", "seis"]
+            },
+            {
+                id: 9,
+                text: "Fase Final (O Código Mestre): Tudo se resume a um número. Qual é o 'nosso dia'?",
+                hint: "Dica: É o dia em que nossa simbiose começou.",
+                answers: ["06", "6", "seis"]
+            }
+        ];
+
+        let currentLevel = 0;
+        let triggerCount = 0;
+        const triggerBtn = document.getElementById('secret-trigger');
+        const secretLab = document.getElementById('secret-lab');
+        const mainContent = document.getElementById('main-content');
+        const riddleText = document.getElementById('riddle-text');
+        const riddleHint = document.getElementById('riddle-hint');
+        const riddleInput = document.getElementById('riddle-input');
+        const errorMsg = document.getElementById('error-msg');
+        const levelIndicator = document.getElementById('level-indicator');
+        const progressBar = document.getElementById('progress-bar');
+        const riddleContainer = document.getElementById('riddle-container');
+        const finalReward = document.getElementById('final-reward');
+
+        // Gatilho (7 cliques no coração)
+        triggerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            triggerCount++;
+            if (triggerCount === 7) {
+                activateSecretMode();
+                triggerCount = 0;
+            }
+        });
+
+        function activateSecretMode() {
+            secretLab.classList.remove('hidden');
+            setTimeout(() => {
+                secretLab.classList.remove('opacity-0');
+                mainContent.style.filter = "blur(5px)";
+            }, 50);
+            loadRiddle(0);
+        }
+
+        function closeSecret() {
+            secretLab.classList.add('opacity-0');
+            mainContent.style.filter = "none";
+            setTimeout(() => {
+                secretLab.classList.add('hidden');
+                currentLevel = 0; // Reseta se quiser que ela comece do zero ao fechar
+                resetUI();
+            }, 1000);
+        }
+
+        function loadRiddle(index) {
+            if (index >= riddles.length) {
+                showVictory();
+                return;
+            }
+            
+            const riddle = riddles[index];
+            riddleText.textContent = riddle.text;
+            riddleHint.textContent = riddle.hint;
+            riddleInput.value = "";
+            levelIndicator.textContent = `Nível de Acesso: ${index + 1}/${riddles.length}`;
+            
+            // Atualiza Barra de Progresso
+            const progress = (index / riddles.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Foco no input
+            setTimeout(() => riddleInput.focus(), 100);
+        }
+
+        function checkAnswer() {
+            const userVal = riddleInput.value.trim().toLowerCase();
+            // Remove acentos para facilitar
+            const normalizedVal = userVal.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            
+            const currentRiddle = riddles[currentLevel];
+            
+            // Verifica se a resposta normalizada ou original está na lista de respostas aceitas
+            const isCorrect = currentRiddle.answers.some(ans => {
+                const normalizedAns = ans.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                return normalizedAns === normalizedVal || ans === userVal;
+            });
+
+            if (isCorrect) {
+                currentLevel++;
+                // Animação de sucesso simples
+                riddleInput.style.borderColor = "#4ade80"; // Green
                 setTimeout(() => {
-                    leaf.remove();
-                }, 8000); // Remove a folha depois que a animação terminar
+                    riddleInput.style.borderColor = "#4ade80"; 
+                    loadRiddle(currentLevel);
+                }, 500);
+            } else {
+                showError();
             }
         }
 
-        loveButton.addEventListener('click', () => {
-            const phraseElement = document.createElement('p');
-            phraseElement.classList.add('love-phrase');
-            
-            const currentPhrase = yourLovePhrases[currentPhraseIndex];
-            const spawnPoint = spawnPoints[currentPhraseIndex % spawnPoints.length];
-            
-            phraseElement.textContent = currentPhrase;
-            phraseElement.style.left = `calc(${spawnPoint.left} + ${Math.random() * 8 - 4}%)`;
-            phraseElement.style.top = `calc(${spawnPoint.top} + ${Math.random() * 8 - 4}%)`;
-            
-            garden.appendChild(phraseElement);
-
-            // Verifica se é a frase especial para a chuva de folhas
-            if (currentPhrase === "Te amo mais que a quantidade de folhas nessa tela") {
-                createLeafFall();
-            }
-            
-            // Avança para a próxima frase
-            currentPhraseIndex = (currentPhraseIndex + 1) % yourLovePhrases.length;
-
+        function showError() {
+            errorMsg.style.opacity = "1";
+            riddleInput.classList.add('animate-pulse'); // Efeito visual
+            riddleInput.style.borderColor = "#ef4444"; // Red
             setTimeout(() => {
-                phraseElement.remove();
-            }, 6900);
+                errorMsg.style.opacity = "0";
+                riddleInput.classList.remove('animate-pulse');
+                riddleInput.style.borderColor = "#4ade80"; // Reset border
+            }, 2000);
+        }
+
+        function showVictory() {
+            progressBar.style.width = "100%";
+            levelIndicator.textContent = "ACESSO CONCEDIDO";
+            riddleContainer.classList.add('hidden');
+            finalReward.classList.remove('hidden');
+        }
+
+        function resetUI() {
+            riddleContainer.classList.remove('hidden');
+            finalReward.classList.add('hidden');
+            progressBar.style.width = "0%";
+        }
+        
+        // Permitir Enter para enviar
+        riddleInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAnswer();
         });
 
-        // --- LÓGICA DA GALERIA MODAL ---
-        const gallery = document.getElementById('gallery');
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        const modalClose = document.getElementById('modal-close');
-
-        gallery.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-                modalImg.src = e.target.src;
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-            }
-        });
-
-        const closeModal = () => {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-        };
-
-        modalClose.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
     </script>
 </body>
 </html>
